@@ -1,6 +1,5 @@
 import { testDictionary, realDictionary } from './dictionary.js';
 
-// for testing purposes, make sure to use the test dictionary
 console.log('test dictionary:', testDictionary);
 
 const dictionary = realDictionary;
@@ -16,13 +15,11 @@ const state = {
 function drawGrid(container) {
   const grid = document.createElement('div');
   grid.className = 'grid';
-
   for (let i = 0; i < 6; i++) {
     for (let j = 0; j < 5; j++) {
       drawBox(grid, i, j);
     }
   }
-
   container.appendChild(grid);
 }
 
@@ -40,7 +37,6 @@ function drawBox(container, row, col, letter = '') {
   box.className = 'box';
   box.textContent = letter;
   box.id = `box${row}${col}`;
-
   container.appendChild(box);
   return box;
 }
@@ -56,7 +52,7 @@ function registerKeyboardEvents() {
           state.currentRow++;
           state.currentCol = 0;
         } else {
-          alert('Not a valid word.');
+          alert('No es valido el Word.');
         }
       }
     }
@@ -66,7 +62,6 @@ function registerKeyboardEvents() {
     if (isLetter(key)) {
       addLetter(key);
     }
-
     updateGrid();
   };
 }
@@ -101,8 +96,7 @@ function getPositionOfOccurrence(word, letter, position) {
 
 function revealWord(guess) {
   const row = state.currentRow;
-  const animation_duration = 500; // ms
-
+  const animation_duration = 500; 
   for (let i = 0; i < 5; i++) {
     const box = document.getElementById(`box${row}${i}`);
     const letter = box.textContent;
@@ -112,7 +106,6 @@ function revealWord(guess) {
     );
     const numOfOccurrencesGuess = getNumOfOccurrencesInWord(guess, letter);
     const letterPosition = getPositionOfOccurrence(guess, letter, i);
-
     setTimeout(() => {
       if (
         numOfOccurrencesGuess > numOfOccurrencesSecret &&
@@ -129,19 +122,17 @@ function revealWord(guess) {
         }
       }
     }, ((i + 1) * animation_duration) / 2);
-
     box.classList.add('animated');
     box.style.animationDelay = `${(i * animation_duration) / 2}ms`;
   }
 
   const isWinner = state.secret === guess;
   const isGameOver = state.currentRow === 5;
-
   setTimeout(() => {
     if (isWinner) {
-      alert('Congratulations!');
+      alert('Felicitaciones!');
     } else if (isGameOver) {
-      alert(`Better luck next time! The word was ${state.secret}.`);
+      alert(`Mejor suerte la proxima vez, la palabra era: ${state.secret}.`);
     }
   }, 3 * animation_duration);
 }
@@ -165,7 +156,6 @@ function removeLetter() {
 function startup() {
   const game = document.getElementById('game');
   drawGrid(game);
-
   registerKeyboardEvents();
 }
 

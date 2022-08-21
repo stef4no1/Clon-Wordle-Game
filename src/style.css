@@ -73,6 +73,7 @@ body {
   font-size: 3rem;
   margin-bottom: 0;
   position: relative;
+  cursor: pointer;
 }
 
 .title-word-clone {
@@ -108,4 +109,14 @@ hr {
   width: 25px;
   height: 25px;
   margin-right: 0.75rem;
+}
+
+a{
+  text-decoration: none;
+  margin-left: 2px;
+  color: violet;
+}
+
+a:hover{
+  color: rgb(148, 23, 148);
 }
